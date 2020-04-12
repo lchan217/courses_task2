@@ -1,11 +1,35 @@
 import React, { Component } from "react";
+import ResultList from "./ResultList";
 
 class CoursesContainer extends Component {
   constructor() {
     super();
     this.state = {
-      courses: []
+      results: []
     };
+  }
+
+  componentDidMount() {
+    let body = {
+      size: 150,
+      query: {
+        match_all: {}
+      }
+    };
+    fetch("http://staging-api.quze.co/search/intern-test/_search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+      .then(resp => resp.json())
+      .then(response => {
+        this.setState({
+          results: response.hits.hits
+        });
+      });
   }
 
   handleClick = () => {
@@ -13,7 +37,7 @@ class CoursesContainer extends Component {
       size: 100,
       query: {
         match: {
-          title: "elasticsearch"
+          title: "javascript"
         }
       }
     };
@@ -34,6 +58,7 @@ class CoursesContainer extends Component {
       <div>
         Courses Container
         <button onClick={this.handleClick}>Click me</button>
+        <ResultList courses={this.state.results} />
       </div>
     );
   }
