@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import ResultList from "./ResultList";
-import { Container } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 
 class CoursesContainer extends Component {
   constructor() {
     super();
     this.state = {
-      results: []
+      results: [],
+      courses: [],
+      search: ""
     };
   }
 
@@ -28,17 +30,35 @@ class CoursesContainer extends Component {
       .then(resp => resp.json())
       .then(response => {
         this.setState({
-          results: response.hits.hits
+          results: response.hits.hits,
+          courses: response.hits.hits
         });
       });
   }
 
-  handleClick = () => {
+  handleChange = event => {
+    this.setState({ search: event.target.value });
+  };
+
+  //   handleSubmit = event => {
+  //     event.preventDefault();
+  //     let results = this.state.courses.filter(course => {
+  //       return course.title
+  //         .toLowerCase()
+  //         .includes(this.state.search.toLowerCase());
+  //     });
+  //     this.setState({ results: results });
+  //   };
+
+  handleClick = event => {
+    event.preventDefault();
+    let query = this.state.search;
+
     let body = {
       size: 100,
       query: {
         match: {
-          title: "javascript"
+          title: `${query}`
         }
       }
     };
@@ -51,14 +71,28 @@ class CoursesContainer extends Component {
       body: JSON.stringify(body)
     })
       .then(resp => resp.json())
-      .then(response => console.log(response));
+      .then(response => {
+        this.setState({
+          results: response.hits.hits
+        });
+      });
   };
 
   render() {
     return (
       <Container>
-        Courses Container
-        <button onClick={this.handleClick}>Click me</button>
+        <Form>
+          <Form.Label>Search by Title: </Form.Label>
+          <Form.Control
+            value={this.state.search}
+            onChange={this.handleChange}
+            type='search'
+            placeholder='keywords'
+          />
+          <Button onClick={this.handleClick} variant='primary' type='submit'>
+            Submit
+          </Button>
+        </Form>
         <ResultList courses={this.state.results} />
       </Container>
     );
