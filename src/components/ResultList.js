@@ -10,6 +10,10 @@ class ResultList extends Component {
     };
   }
 
+  handleOnClick = course => {
+    this.setState({ showCourse: true, course: course });
+  };
+
   render() {
     let data;
     if (this.state.showCourse) {
@@ -25,7 +29,9 @@ class ResultList extends Component {
                 <Card.Text>
                   {course._source.shortDescription.slice(0, 300)}
                 </Card.Text>
-                <Button>More Details</Button>
+                <Button onClick={() => this.handleOnClick(course)}>
+                  More Details
+                </Button>
               </Card.Body>
               <Card.Footer>
                 {course._source.quzeTags &&
