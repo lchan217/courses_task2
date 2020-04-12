@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 class ResultList extends Component {
   constructor() {
@@ -17,7 +18,14 @@ class ResultList extends Component {
   render() {
     let data;
     if (this.state.showCourse) {
-      data = "Course Page";
+      data = (
+        <Redirect
+          to={{
+            pathname: `${this.state.course._id}`,
+            state: { course: this.state.course }
+          }}
+        />
+      );
     } else {
       data = this.props.courses.map(course => {
         return (
