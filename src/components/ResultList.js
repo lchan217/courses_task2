@@ -23,7 +23,7 @@ class ResultList extends Component {
               <Card.Body>
                 <Card.Title>{course._source.title}</Card.Title>
                 <Card.Text>
-                  {course._source.shortDescription}.slice(0,300)
+                  {course._source.shortDescription.slice(0, 300)}
                 </Card.Text>
                 <Button>More Details</Button>
               </Card.Body>
