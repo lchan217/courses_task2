@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ResultList from "./ResultList";
+import { Container } from "react-bootstrap";
 
 class CoursesContainer extends Component {
   constructor() {
@@ -55,11 +56,11 @@ class CoursesContainer extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         Courses Container
         <button onClick={this.handleClick}>Click me</button>
         <ResultList courses={this.state.results} />
-      </div>
+      </Container>
     );
   }
 }
