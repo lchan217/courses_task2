@@ -14,4 +14,4 @@ You will also see any lint errors in the console.
 
 ## Comments
 
-This project took around 5 hours and is incomplete due to time constraints. The styling is with React Bootstrap.
+This project took around 5 hours and is incomplete due to a time restraint. The styling is with React Bootstrap.
