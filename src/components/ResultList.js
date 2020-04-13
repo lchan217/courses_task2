@@ -41,16 +41,6 @@ class ResultList extends Component {
                   More Details
                 </Button>
               </Card.Body>
-              <Card.Footer>
-                {course._source.quzeTags &&
-                  course._source.quzeTags.split(",").map(tag => {
-                    return (
-                      <Button size='sm' variant='secondary'>
-                        {tag}{" "}
-                      </Button>
-                    );
-                  })}
-              </Card.Footer>
             </Card>
           </Col>
         );

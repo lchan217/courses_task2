@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "react-bootstrap";
+import { Image, Container } from "react-bootstrap";
 
 const ShowCourse = props => {
   const {
@@ -13,7 +13,7 @@ const ShowCourse = props => {
     url
   } = props.location.state.course._source;
   return (
-    <div>
+    <Container>
       <h1>{title}</h1>
       <h3>By: {author}</h3>
       <Image src={imgUrl} style={{ width: "20em" }} />
@@ -23,7 +23,7 @@ const ShowCourse = props => {
         Time: {duration} {durationPeriod}
       </div>
       <div>Level: {level}</div>
-    </div>
+    </Container>
   );
 };
 
