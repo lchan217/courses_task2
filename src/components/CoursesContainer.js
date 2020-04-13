@@ -40,25 +40,14 @@ class CoursesContainer extends Component {
     this.setState({ search: event.target.value });
   };
 
-  //   handleSubmit = event => {
-  //     event.preventDefault();
-  //     let results = this.state.courses.filter(course => {
-  //       return course.title
-  //         .toLowerCase()
-  //         .includes(this.state.search.toLowerCase());
-  //     });
-  //     this.setState({ results: results });
-  //   };
-
   handleClick = event => {
     event.preventDefault();
     let query = this.state.search;
-
     let body = {
-      size: 100,
+      size: 150,
       query: {
-        match: {
-          title: `${query}`
+        wildcard: {
+          title: `*${query}*`
         }
       }
     };
@@ -83,6 +72,7 @@ class CoursesContainer extends Component {
       <Container>
         <Form>
           <Form.Label>Search by Title: </Form.Label>
+
           <Form.Control
             value={this.state.search}
             onChange={this.handleChange}
